@@ -1,0 +1,15 @@
+
+Dev Log
+
+
+Sat 17.09
+-----
+
+
+- create-react-app
+    - https://github.com/facebookincubator/create-react-app#getting-started
+    - https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html
+- Verify node and npm
+    - homebrew has package "node" (v0.12) and node4-lts => using this one
+    - npm install npm -g
+
