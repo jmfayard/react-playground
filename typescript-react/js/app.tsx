@@ -12,18 +12,23 @@ declare var Router;
 import { TodoModel } from "./todoModel";
 import { TodoFooter } from "./footer";
 import { TodoItem } from "./todoItem";
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS, ENTER_KEY } from "./constants";
+import {ACTIVE_TODOS, ALL_TODOS, COMPLETED_TODOS, ENTER_KEY, ESCAPE_KEY} from "./constants";
+import { H } from  "./jmf";
 
 class TodoApp extends React.Component<IAppProps, IAppState> {
 
-  public state : IAppState;
+  public state:IAppState;
 
-  constructor(props : IAppProps) {
+  constructor(props:IAppProps) {
     super(props);
     this.state = {
       nowShowing: ALL_TODOS,
       editing: null
     };
+  }
+
+  public model():ITodoModel {
+    return this.props.model;
   }
 
   public componentDidMount() {
@@ -36,7 +41,7 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
     router.init('/');
   }
 
-  public handleNewTodoKeyDown(event : __React.KeyboardEvent) {
+  public handleNewTodoKeyDown(event:__React.KeyboardEvent) {
     if (event.keyCode !== ENTER_KEY) {
       return;
     }
@@ -45,31 +50,33 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
 
     var val = React.findDOMNode<HTMLInputElement>(this.refs["newField"]).value.trim();
 
+
     if (val) {
       this.props.model.addTodo(val);
       React.findDOMNode<HTMLInputElement>(this.refs["newField"]).value = '';
     }
   }
 
-  public toggleAll(event : __React.FormEvent) {
-    var target : any = event.target;
+  public toggleAll(event:__React.FormEvent) {
+    var target:any = event.target;
     var checked = target.checked;
     this.props.model.toggleAll(checked);
   }
 
-  public toggle(todoToToggle : ITodo) {
-    this.props.model.toggle(todoToToggle);
+  public toggle(todoToToggle:ITodo) {
+    this.model().toggle(todoToToggle);
+    //this.props.model.toggle(todoToToggle);
   }
 
-  public destroy(todo : ITodo) {
+  public destroy(todo:ITodo) {
     this.props.model.destroy(todo);
   }
 
-  public edit(todo : ITodo) {
+  public edit(todo:ITodo) {
     this.setState({editing: todo.id});
   }
 
-  public save(todoToSave : ITodo, text : String) {
+  public save(todoToSave:ITodo, text:String) {
     this.props.model.save(todoToSave, text);
     this.setState({editing: null});
   }
@@ -89,12 +96,12 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
 
     var shownTodos = todos.filter((todo) => {
       switch (this.state.nowShowing) {
-      case ACTIVE_TODOS:
-        return !todo.completed;
-      case COMPLETED_TODOS:
-        return todo.completed;
-      default:
-        return true;
+        case ACTIVE_TODOS:
+          return !todo.completed;
+        case COMPLETED_TODOS:
+          return todo.completed;
+        default:
+          return true;
       }
     });
 
@@ -152,11 +159,12 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
     return (
       <div>
         <header className="header">
-          <h1>todos</h1>
+          <H level={1} text="HELLO WOLRD"/>
+          <H level={2} text="Great success"/>
           <input
             ref="newField"
             className="new-todo"
-            placeholder="What needs to be done?"
+            placeholder="What needs to be done ASAP?"
             onKeyDown={ e => this.handleNewTodoKeyDown(e) }
             autoFocus={true}
           />

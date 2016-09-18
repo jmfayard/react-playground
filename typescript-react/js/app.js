@@ -1,19 +1,13 @@
-/*jshint quotmark:false */
-/*jshint white:false */
-/*jshint trailing:false */
-/*jshint newcap:false */
-/*global React, Router*/
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-/// <reference path="../typings/tsd.d.ts" />
-/// <reference path="./interfaces.d.ts"/>
-var TodoModel_1 = require("./TodoModel");
+var todoModel_1 = require("./todoModel");
 var footer_1 = require("./footer");
 var todoItem_1 = require("./todoItem");
 var constants_1 = require("./constants");
+var jmf_1 = require("./jmf");
 var TodoApp = (function (_super) {
     __extends(TodoApp, _super);
     function TodoApp(props) {
@@ -23,6 +17,9 @@ var TodoApp = (function (_super) {
             editing: null
         };
     }
+    TodoApp.prototype.model = function () {
+        return this.props.model;
+    };
     TodoApp.prototype.componentDidMount = function () {
         var setState = this.setState;
         var router = Router({
@@ -49,7 +46,7 @@ var TodoApp = (function (_super) {
         this.props.model.toggleAll(checked);
     };
     TodoApp.prototype.toggle = function (todoToToggle) {
-        this.props.model.toggle(todoToToggle);
+        this.model().toggle(todoToToggle);
     };
     TodoApp.prototype.destroy = function (todo) {
         this.props.model.destroy(todo);
@@ -96,11 +93,11 @@ var TodoApp = (function (_super) {
         if (todos.length) {
             main = (React.createElement("section", {"className": "main"}, React.createElement("input", {"className": "toggle-all", "type": "checkbox", "onChange": function (e) { return _this.toggleAll(e); }, "checked": activeTodoCount === 0}), React.createElement("ul", {"className": "todo-list"}, todoItems)));
         }
-        return (React.createElement("div", null, React.createElement("header", {"className": "header"}, React.createElement("h1", null, "todos"), React.createElement("input", {"ref": "newField", "className": "new-todo", "placeholder": "What needs to be done?", "onKeyDown": function (e) { return _this.handleNewTodoKeyDown(e); }, "autoFocus": true})), main, footer));
+        return (React.createElement("div", null, React.createElement("header", {"className": "header"}, React.createElement(jmf_1.H, {"level": 1, "text": "HELLO WOLRD"}), React.createElement(jmf_1.H, {"level": 2, "text": "Great success"}), React.createElement("input", {"ref": "newField", "className": "new-todo", "placeholder": "What needs to be done ASAP?", "onKeyDown": function (e) { return _this.handleNewTodoKeyDown(e); }, "autoFocus": true})), main, footer));
     };
     return TodoApp;
 })(React.Component);
-var model = new TodoModel_1.TodoModel('react-todos');
+var model = new todoModel_1.TodoModel('react-todos');
 function render() {
     React.render(React.createElement(TodoApp, {"model": model}), document.getElementsByClassName('todoapp')[0]);
 }
