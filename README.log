@@ -21,9 +21,12 @@ Sat 17.09
 - vendor prefixes automatically added. Ouch would have been such a pain
 - With webpack, you can import './Button.js' and images!
 
-- Have to go back to ES6 import and export http://exploringjs.com/es6/ch_modules.html
+x Have to go back to ES6 import and export http://exploringjs.com/es6/ch_modules.html
 
+- Trying out the "Adding React Bootstrap" section
+- Intellij > Preferences > Node.js & NPM has a cool package manager!
 
+- Chrome extensino add a reat tab https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
 
 
 
